@@ -1,13 +1,11 @@
 <template>
   <div class="recommend">
     <swiper :options="swiperOption">
-      <swiper-slide class="swiper-slide" v-for="(item,index) in recommends" :key="index">
-        <div class="recommend-item">
-          <a :href="item.link">
-            <img :src="item.image" width="100%" />
-            <div>{{item.title}}</div>
-          </a>
-        </div>
+      <swiper-slide class="recommend-item" v-for="(item,index) in recommends" :key="index">
+        <a :href="item.link">
+          <img :src="item.image" width="100%" />
+          <div>{{item.title}}</div>
+        </a>
       </swiper-slide>
     </swiper>
   </div>
@@ -28,7 +26,7 @@ export default {
   data() {
     return {
       swiperOption: {
-        slidesPerView: 3 //设置swiper插件的每个页面展示3个图片。
+        slidesPerView: 4 //设置swiper插件的每个页面展示3个图片。
       }
     };
   },
@@ -44,13 +42,20 @@ export default {
   display: flex;
   width: 100%;
   text-align: center;
-  font-size: 12px;
-  padding: 5px 0px 5px;
-  border-bottom: 10px solid #eee;
+  font-size: 13px;
+  padding: 3px 0px 3px 0px;
+  border-bottom: 8px solid #eee;
+}
+
+.swiper-container {
+  width: 100%;
+}
+.recommend-item {
+  flex: 1;
 }
 .recommend-item img {
-  width: 90px;
-  height: 90px;
-  margin-bottom: 10px;
+  width: 70px;
+  height: 70px;
+  margin-bottom: 5px;
 }
 </style>

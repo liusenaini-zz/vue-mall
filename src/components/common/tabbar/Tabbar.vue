@@ -1,4 +1,5 @@
 <template>
+    <!-- 底栏进行组件封装 -->
     <div id="tab-bar">
        <slot></slot>
     </div>
@@ -19,5 +20,6 @@
     right: 0px;
     bottom:0px;
     box-shadow: 0 -1px 1px rgba(100,100,100,0.2);
+    z-index: 999;
 }
 </style>

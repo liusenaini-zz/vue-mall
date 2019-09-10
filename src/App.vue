@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <router-view/>
+    <!-- 封装底栏main-tab-bar组件 -->
     <main-tab-bar/>
   </div>
 </template>
@@ -15,5 +16,6 @@ export default {
 }
 </script>
 <style>
+/* 引入的常用的css样式初始化 */
 @import 'assets/css/base.css';
 </style>
