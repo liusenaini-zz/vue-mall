@@ -1,6 +1,7 @@
 <template>
-  <div class="goods-item">
-        <img :src="goodsitem.show.img" alt="">
+  <div class="goods-item" @click="itemclick">
+        <!-- load事件监听图片加载数量 -->
+        <img :src="goodsitem.show.img" alt="" @load="imageLoad">
     <div class="goods-info">
         <p>{{goodsitem.title}}</p>
         <span class="price">￥{{goodsitem.price}}</span>
@@ -22,6 +23,14 @@
             return{
 
             }
+        },
+        methods:{
+          imageLoad(){
+            this.$bus.$emit('itemImageLoad')
+          },
+          itemclick(){
+            this.$router.push('/detail/'+this.goodsitem.iid)//动态路由传值
+          }
         }
     }
 </script>

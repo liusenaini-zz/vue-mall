@@ -6,6 +6,7 @@ const Home =() => import('views/home/Home.vue')
 const Category =() =>import('views/category/Category.vue')
 const Shopcart =() =>import('views/shopcart/Shopcart.vue')
 const Profile =() =>import('views/profile/Profile.vue')
+const Detail =() =>import('views/detail/Detail.vue')
 
 Vue.use(router)
 export default new router({
@@ -30,6 +31,10 @@ export default new router({
         {
             path: '/profile',
             component: Profile
+        },
+        {
+            path: '/detail/:iid',//动态路由传值
+            component:Detail
         }
     ]
 })

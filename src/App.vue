@@ -1,6 +1,8 @@
 <template>
   <div id="app">
+    <keep-alive>
     <router-view/>
+    </keep-alive>
     <!-- 封装底栏main-tab-bar组件 -->
     <main-tab-bar/>
   </div>

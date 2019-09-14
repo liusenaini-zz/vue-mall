@@ -2,7 +2,7 @@
   <div class="swiper-area">
     <swiper :options="swiperOption">
       <swiper-slide class="swiper-slide" v-for="(item,index) in banners" :key="index">
-        <img :src="item.image" width="100%" />
+        <img :src="item.image" width="100%" @load="loadimg"/>
       </swiper-slide>
       <div class="swiper-pagination" slot="pagination"></div>
     </swiper>
@@ -30,12 +30,22 @@ export default {
           el: ".swiper-pagination", //配置点
           clickable: true //配置点击哪个点跳到哪个点
         }
-      }
+      },
+      isload:false
     };
   },
   components: {
     swiper,
     swiperSlide
+  },
+  methods:{
+    loadimg(){
+      if(!this.isload){
+        //利用isload可以只监控一张轮播图是否加载完成
+        this.$emit('swiperloadimg')
+        this.isload = true
+      }
+    }
   }
 };
 </script>

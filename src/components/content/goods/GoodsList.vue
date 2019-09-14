@@ -1,5 +1,6 @@
 <template>
     <div class="goods">
+      <!-- 循环遍历goods-list-item组件 -->
       <goods-list-item v-for="(item,index) in goods" :key="index" :goodsitem='item'/>
     </div>
 </template>
