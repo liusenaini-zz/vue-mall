@@ -51,7 +51,6 @@ export default {
 .comment-info {
   padding: 5px 12px;
   color: #333;
-  border-bottom: 5px solid #f2f5f8;
 }
 
 .info-header {

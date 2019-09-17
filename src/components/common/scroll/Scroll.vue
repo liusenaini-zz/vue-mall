@@ -47,7 +47,7 @@ export default {
   },
 
   methods: {
-    scrollTo(x, y, time = 300) {
+    scrollTo(x, y, time) {
       //将this.scroll.scrollTo方法封装成srcollTo直接调用。
       this.scroll.scrollTo(x, y, time);
     },
@@ -57,10 +57,12 @@ export default {
     },
     refresh() {
       // 调用方法前做一下判断
-      this.scroll && this.scroll.refresh(); //调用scroll对象的refresh方法刷新scrollerHeight高度，解决上拉刷新scrollerHeight固定高度bug,bug让图片不能正常展示。
+      this.scroll && this.scroll.refresh(); 
+  //=>调用scroll对象的refresh方法刷新scrollerHeight高度，解决上拉刷新scrollerHeight固定高度bug,bug让图片不能正常展示。
+
     },
     getscrollY(){
-      return this.scroll ? this.scroll.y : 0
+      return  this.scroll ? this.scroll.y : 0
     }
   }
 };

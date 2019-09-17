@@ -46,3 +46,11 @@ export class ParamInfo{
       this.sizes = rule.tables
    }
 }
+
+
+//评论数据请求
+export function getRecommend(){
+   return request({
+      url:'/recommend',
+   })
+}

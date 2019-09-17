@@ -5,7 +5,7 @@
       <div slot="center">购物</div>
     </nav-bar>
     <!-- 吸顶效果 -->
-    <tab-control  :title="['流行','新款','精选']" @tabClick='gettabClick' ref='tabControl' class="tab-control" v-show="isfixed"/>
+    <tab-control  ref='TabControl' :title="['流行','新款','精选']" @tabClick='gettabClick'  class="tab-control" v-show="isfixed"/>
 
     <!-- 封装scroll滚动组件 -->
     <scroll ref="scrolldata" :probeType='3' @scroll='getposition' :pullUpLoad='true' @pullingUp='loadMore'>
@@ -18,7 +18,7 @@
     <!-- 封装tab-control组件 -->
     <tab-control  :title="['流行','新款','精选']" @tabClick='gettabClick' ref='tabControl'/>
     <!-- 封装goods-list组件 -->
-    <goods-list :goods="currentTypedata"/>
+    <goods-list :goods="currentTypedata" />
     </scroll>
     
     <!-- 封装回到顶部组件 -->
@@ -40,7 +40,7 @@ import RecommendView from "./childComps/RecommendView.vue";
 import FeatureView from "./childComps/FeatureView.vue";
 //其他文件的导入
 import { getHomeMultidata, getHomeGoods } from "network/home.js"; //引入用于请求的文件
-import  {debounce} from 'common/utils.js'//引入防抖函数
+import {itemListenerMixin} from "common/mixin.js"//引入混入文件
 export default {
   data() {
     return {
@@ -56,7 +56,7 @@ export default {
       isshowbacktop:false,
       tabOffsetTop:0,
       isfixed:false,
-      saveY:0
+      saveY:0,
     };
   },
   components: {
@@ -99,15 +99,13 @@ export default {
   mounted(){
      //监听item中图片加载数量完成后调用刷新方法
      //在mounted生命周期函数中使用 this.$refs.scroll而不是created中(bug)
-     const refresh = debounce(this.$refs.scrolldata.refresh,200)
-      this.$bus.$on('itemImageLoad',function(){
-        //优化代码，利用封装的防抖函数等图片都加载完后在一起刷新
-       refresh()
-    })
-
-
+     // const refresh = debounce(this.$refs.scrolldata.refresh,500)//利用封装的防抖函数等一张一张的图片都加载完后在一起刷新整个页面高度
+    //  this.itemImgListenter = ()=>{refresh()}
+    //  this.$bus.$on('itemImageLoad',this.itemImgListenter)//此处代码利用混入mixin抽离到了mixin.js文件 
+    
   },
- 
+  mixins:[itemListenerMixin],
+
 
 
 
@@ -126,6 +124,9 @@ export default {
          this.currentType = 'sell'
          break
       }
+      //拿到tabControl组件里的current属性，当点击是将date的值赋给两个current，统一点击状态
+      this.$refs.TabControl.current = data
+      this.$refs.tabControl.current = data
     },
 
     // 点击图标箭头回到顶部
@@ -158,9 +159,7 @@ export default {
       this.tabOffsetTop = this.$refs.tabControl.$el.offsetTop
     },
 
-   
-   
-
+  
 
 
    /*网络请求相关的封装方法*/
@@ -185,7 +184,8 @@ export default {
       });
     },
 
-  }
+  },
+  
 };
 </script>
 
