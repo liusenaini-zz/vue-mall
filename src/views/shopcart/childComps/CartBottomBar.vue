@@ -3,7 +3,7 @@
     <check-button class="select-all" :ischecked='isallchecked'  @click.native="allcheckedbutton"/>
     <span>全选</span>
     <span class="total-price">合计: ¥{{totalPrice}} 总数:{{checkLength}}</span>
-    <span class="buy-product">点击购买</span>
+    <span class="buy-product" @click="buyClick">点击购买</span>
   </div>
 </template>
 
@@ -12,25 +12,25 @@ import CheckButton from "components/content/checkButton/CheckButton.vue";
 export default {
   computed: {
     totalPrice() {
-      //两个高阶函数的运用
+      //两个高阶函数的运用（合计）
       return this.$store.state.cartList
-        .filter(item => item.checked === true) //高阶过滤函数，过滤出选中的商品
+        .filter(item => item.checked === true) //高阶过滤函数，过滤出选中的商品 filter函数返回的是一个数组
         .reduce((prevalue, item) => prevalue + item.price * item.count, 0) //将选中的商品在进行一次汇总，prevalue默认数值0
         .toFixed(2); //保留2位小数
     },
-    checkLength() {
+    checkLength() {//（总数）
           return this.$store.state.cartList.filter(item => item.checked === true).length;
     },
 
 
     //设置全选按钮两步
-    //1、显示状态，当所有商品都选中时全选按钮选中，当有一个不选中时全选按钮不选中
+    //1、显示状态，当所有商品都选中时全选按钮选中，当有一个商品不选中时全选按钮不选中
     isallchecked() {
           //显示状态
           // 方法一
           // 考虑没有商品的情况下
           if(this.$store.state.cartList.length){
-              return !this.$store.state.cartList.find(item => item.checked === false)//find函数：当找到时返回true
+              return !this.$store.state.cartList.find(item => item.checked === false)//find函数：当找到时返回数组里的符合要求的item对象
           }
           //方法二
           // return !(this.$store.state.cartList.filter(item => item.checked === false).length)//利用过滤出不选中的商品长度取否
@@ -42,11 +42,19 @@ export default {
      //2、当某些商品没选中时，点击全选按钮都选中
     allcheckedbutton(){
         if(this.isallchecked){//第一种情况，当商品全部选中时
-            this.$store.state.cartList.forEach(item =>item.checked = false);
+            this.$store.state.cartList.forEach(item =>item.checked = false);//forEach函数将数组里的对象的属性重新修改赋值
         }else{//第二种情况，当某些商品或所有商品没选中时
             this.$store.state.cartList.forEach(item =>item.checked = true);
         }
        
+    },
+    buyClick(){
+        if(this.isallchecked || this.$store.state.cartList.filter(item => item.checked === true).length)
+        {
+          this.$toast.show('购买成功,等待发货',1500)
+        }else{
+          this.$toast.show('请选择购买的商品',1500)
+        }
     }
 
   },

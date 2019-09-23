@@ -26,6 +26,8 @@
     <detail-bottom-bar @addToCart='addCart'/>
     <!-- 封住回顶部箭头图标组件 -->
     <back-top @click.native="backclick" v-show="isshowbacktop"/>
+    <!-- 封装toast弹窗组件 -->
+    <!-- <toast :message='message' :isshow='isshow'/> -->
   </div>
 </template>
 
@@ -39,11 +41,14 @@ import DetailParamInfo from "views/detail/chilComps/DetailParamInfo.vue";
 import DetailCommentInfo from "views/detail/chilComps/DetailCommentInfo.vue";
 import GoodsList from "components/content/goods/GoodsList.vue";
 import DetailBottomBar from "views/detail/chilComps/DetailBottomBar.vue"
+// import Toast from "components/common/toast/Toast.vue";//引入弹框组件,也可以直接用自己封装好的插件
 
 import { getDetail,Goods,Shop,ParamInfo,getRecommend} from "network/detail.js"; //引入请求文件
 import Scroll from "components/common/scroll/Scroll.vue" 
 import {itemListenerMixin,backTopMixin} from "common/mixin.js"//引入混入文件
 import BackTop from "components/content/backTop/BackTop.vue"
+
+import {mapActions} from "vuex"
 export default {
   name: "Detail",
   data() {
@@ -57,7 +62,9 @@ export default {
       commentInfo:{},
       recommends:[],
       themTopYs:[],
-      currentIndex:0
+      currentIndex:0,
+      message:'',
+      isshow:false
     };
   },
   components: {
@@ -71,7 +78,8 @@ export default {
     DetailCommentInfo,
     GoodsList,
     DetailBottomBar,
-    BackTop
+    BackTop,
+    // Toast
   },
   created() {
      //接收GoodsListlitem组件传递过来的iid
@@ -106,8 +114,9 @@ export default {
      this.recommends=res.data.list
       //  console.log(res)
    })
-},
+  },
    methods: {
+     ...mapActions({add:'addCart'}),//映射vuex的actions属性的addCart方法
      imageLoad(){
       this.$refs.scrolldata.refresh()//解决上部分图片上拉不展示全部图片问题 ,
       //不用防抖方法也行,让DetailImagesInfo组件将图片全部加载完发送一次事件过来。
@@ -163,7 +172,7 @@ export default {
        //判断图标箭头是否显示出来
        this.ListenterBackTop(position)
      },
-
+     
     //添加到购物车
     addCart(){
      //1.获取购物车需要展示的信息
@@ -175,7 +184,24 @@ export default {
      product.iid = this.iid
      //console.log(product)
      //2.将商品信息添加到购物车页面(利用vuex)
-     this.$store.dispatch('addCart',product)
+    //  this.$store.dispatch('addCart',product)
+    //  .then(res=>{//监听商品添加到购物车的状态
+    //    console.log(res)
+    //  })
+     
+     //提示加入购物车成功弹窗
+     //两种方法，方法一：用Promise对象监听商品添加到购物车的状态（成功还是失败）
+     //方法二：利用mapActions映射把vuex的actions属性里的方法映射到组件里来...mapActions(['addCart'])监听商品添加到购物车的状态
+    this.add(product)//利用映射的方法也可以将商品信息添加到购物车页面，此行代码等价于this.$store.dispatch('addCart',product)
+    .then(res=>{//监听商品添加到购物车的状态
+      //  this.isshow = true
+      //  this.message = res
+      //  setTimeout(()=>{
+      //     this.isshow = false;
+      //     this.message = ''
+      //  },1500)利用自己封装好的toast插件的this.$toast.show方法
+      this.$toast.show('成功添加至购物车',1500)
+     })
     }
   },
   mounted(){
