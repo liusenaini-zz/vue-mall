@@ -62,6 +62,7 @@ export default {
 
     },
     getscrollY(){
+      //获取首页页面滑动后的当前位置
       return  this.scroll ? this.scroll.y : 0
     }
   }

@@ -40,7 +40,7 @@ import RecommendView from "./childComps/RecommendView.vue";
 import FeatureView from "./childComps/FeatureView.vue";
 //其他文件的导入
 import { getHomeMultidata, getHomeGoods } from "network/home.js"; //引入用于请求的文件
-import {itemListenerMixin} from "common/mixin.js"//引入混入文件
+import {itemListenerMixin,backTopMixin} from "common/mixin.js"//引入混入文件
 export default {
   data() {
     return {
@@ -53,7 +53,6 @@ export default {
         sell:{ page: 0, list: [] },
       },
       currentType:'pop',
-      isshowbacktop:false,
       tabOffsetTop:0,
       isfixed:false,
       saveY:0,
@@ -104,7 +103,7 @@ export default {
     //  this.$bus.$on('itemImageLoad',this.itemImgListenter)//此处代码利用混入mixin抽离到了mixin.js文件 
     
   },
-  mixins:[itemListenerMixin],
+  mixins:[itemListenerMixin,backTopMixin],
 
 
 
@@ -124,22 +123,17 @@ export default {
          this.currentType = 'sell'
          break
       }
+
+      //解决吸顶栏点击时标题样式不变的bug
       //拿到tabControl组件里的current属性，当点击是将date的值赋给两个current，统一点击状态
       this.$refs.TabControl.current = data
       this.$refs.tabControl.current = data
     },
 
-    // 点击图标箭头回到顶部
-    backclick(){
-          //native修饰符对整个组件进行事件监听 
-          this.$refs.scrolldata.scrollTo(0,0,1000)//通过$refs拿到scroll组件里的scrollTo方法并传值
-
-    },
-
     //拿到子组件传递过来的滚动位置进行判断，是否显示隐藏箭头
     getposition(position){
-      //1、判断是否返回顶部
-        this.isshowbacktop = (-position.y>1000)? true : false
+        //1、判断图标箭头是否显示出来
+        this.ListenterBackTop(position)
         //2、决定是否吸顶
         this.isfixed =  (-position.y) > this.tabOffsetTop
     },
@@ -173,7 +167,7 @@ export default {
     //请求商品数据的封装方法
     getHomeGoods(type) {
       //不要让页数硬编码
-      const page = this.goods[type].page + 1//这里的type外加括号是将传入的string类型的'type'字符串转化为对象。
+      const page = this.goods[type].page + 1//这里的type外加括号是将传入的字符串类型的'type'转义让goods[type]整体变成对象。
       getHomeGoods(type, page).then(res => {
             //  =>res请求回来的数据是第一页数据 type是pop page是第一页
              this.goods[type].list.push(...res.data.list)//将请求到每页的数据依次存储到list里，利用了数组解构，将数组里的元素一个一个的放入新数组里。
