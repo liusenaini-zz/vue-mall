@@ -10,19 +10,19 @@
     <section class="account">
       <div class="account-item">
         <div class="number">
-          <span class="balance">0.00</span>元
+          <span class="balance">6.66</span>元
         </div>
         <div class="account-info">我的余额</div>
       </div>
       <div class="account-item">
         <div class="number">
-          <span class="balance">0</span>个
+          <span class="balance">6</span>个
         </div>
         <div class="account-info">我的优惠</div>
       </div>
       <div class="account-item">
         <div class="number">
-          <span class="balance">0</span>分
+          <span class="balance">6</span>分
         </div>
         <div class="account-info">我的积分</div>
       </div>

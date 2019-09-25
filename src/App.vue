@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!-- exclude将name名字为Detail的组件排除在缓存之外 避免从首页点击商品进入详情页数据不更新-->
-    <keep-alive exclude="Detail">
+    <keep-alive exclude="Detail" >
     <router-view/>
     </keep-alive>
     <!-- 封装底栏main-tab-bar组件 -->
