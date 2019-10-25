@@ -1,6 +1,6 @@
 <template>
     <div class="check-button" :class="{active: ischecked}" >
-        <img src="~/assets/img/cart/tick.svg" alt="">
+        <img src="~/assets/img/cart/tick.png" alt="">
     </div>
 </template>
 
@@ -34,6 +34,10 @@
     border-radius: 50%;
     border: 2px solid #ccc;
     cursor: pointer;
+}
+.check-button img{
+    width: 100%;
+    height: 100%;
 }
 .active{
     background-color: #1296db;

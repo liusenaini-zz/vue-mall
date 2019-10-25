@@ -2,7 +2,7 @@
   <div>
     <nav-bar>
         <div slot="left" class="back" @click="back">
-            <img src="~assets/img/common/back.svg" alt="">
+            <img src="~assets/img/common/back.png" alt="">
         </div>
       <div slot="center" class="title">
         <div
@@ -52,6 +52,10 @@ export default {
   color: #1296db;
 }
 .back{
-   margin-top: 5px;
+   margin-top: 2px;
+}
+.back img{
+  width: 27px;
+  height: 17px;
 }
 </style>

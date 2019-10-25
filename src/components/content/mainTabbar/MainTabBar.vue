@@ -4,23 +4,23 @@
     <tab-bar>
       <!-- 里层tab-bar-item组件的具名卡槽 -->
       <tab-bar-item path="/home" activecolor="#1296db">
-        <img slot="item-icon" src="~assets/img/tabbar/home.svg" />
-        <img slot="item-icon-active" src="~assets/img/tabbar/home_active.svg" />
+        <img slot="item-icon" src="~assets/img/tabbar/home.png" />
+        <img slot="item-icon-active" src="~assets/img/tabbar/home_active.png" />
         <div slot="item-text">首页</div>
       </tab-bar-item>
       <tab-bar-item path="/category" activecolor="#1296db">
-        <img slot="item-icon" src="~assets/img/tabbar/category.svg" />
-        <img slot="item-icon-active" src="~assets/img/tabbar/category_active.svg" />
+        <img slot="item-icon" src="~assets/img/tabbar/category.png" />
+        <img slot="item-icon-active" src="~assets/img/tabbar/category_active.png" />
         <div slot="item-text">商品</div>
       </tab-bar-item>
       <tab-bar-item path="/shopcart" activecolor="#1296db">
-        <img slot="item-icon" src="~assets/img/tabbar/shopcart.svg" />
-        <img slot="item-icon-active" src="~assets/img/tabbar/shopcart_active.svg"/>
+        <img slot="item-icon" src="~assets/img/tabbar/shopcart.png" />
+        <img slot="item-icon-active" src="~assets/img/tabbar/shopcart_active.png"/>
         <div slot="item-text">购物车</div>
       </tab-bar-item>
       <tab-bar-item path="/profile" activecolor="#1296db">
-        <img slot="item-icon" src="~assets/img/tabbar/profile.svg" />
-        <img slot="item-icon-active" src="~assets/img/tabbar/profile_active.svg"/>
+        <img slot="item-icon" src="~assets/img/tabbar/profile.png" />
+        <img slot="item-icon-active" src="~assets/img/tabbar/profile_active.png"/>
         <div slot="item-text">我的</div>
       </tab-bar-item>
     </tab-bar>
@@ -39,4 +39,5 @@ export default {
 </script>
 
 <style scoped>
+
 </style>

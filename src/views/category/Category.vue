@@ -26,6 +26,7 @@ import CateList from "./childComps/CateList.vue";
 
 import {getCategory, getCategoryDetail,getSubcategory} from "network/category.js"; //引入请求文件
 export default {
+   name:'category',
   components: {
     NavBar,
     CateTabMenu,

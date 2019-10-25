@@ -67,7 +67,7 @@ export default {
 <style scoped>
 .bottom-menu {
   width: 100%;
-  height: 40px;
+  height: 45px;
   background-color: #eee;
   position: absolute;
   bottom: 49px;

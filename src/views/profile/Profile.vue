@@ -40,7 +40,7 @@ import ListView from "./childComps/ListView";
 import NavBar from "components/common/navbar/NavBar";
 
 export default {
-  name: "Profile",
+  name:'profile',
   components: {
     UserInfo,
     ListView,

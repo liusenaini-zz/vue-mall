@@ -50,7 +50,7 @@ import BackTop from "components/content/backTop/BackTop.vue"
 
 import {mapActions} from "vuex"
 export default {
-  name: "Detail",
+  name:'detail',
   data() {
     return {
       iid: null,

@@ -42,6 +42,7 @@ import FeatureView from "./childComps/FeatureView.vue";
 import { getHomeMultidata, getHomeGoods } from "network/home.js"; //引入用于请求的文件
 import {itemListenerMixin,backTopMixin} from "common/mixin.js"//引入混入文件
 export default {
+  name: 'home',
   data() {
     return {
       banners: [],
@@ -167,7 +168,7 @@ export default {
     //请求商品数据的封装方法
     getHomeGoods(type) {
       //不要让页数硬编码
-      const page = this.goods[type].page + 1//这里的type外加括号是将传入的字符串类型的'type'转义让goods[type]整体变成对象。
+      const page = this.goods[type].page + 1//goods[type]跟goods.type一样的作用，这里是因为传过来的'type'是字符串所以得加[]括起来,是读取属性的另一种的方式
       getHomeGoods(type, page).then(res => {
             //  =>res请求回来的数据是第一页数据 type是pop page是第一页
              this.goods[type].list.push(...res.data.list)//将请求到每页的数据依次存储到list里，利用了数组解构，将数组里的元素一个一个的放入新数组里。

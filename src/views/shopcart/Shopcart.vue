@@ -23,6 +23,7 @@ import CartBottomBar from "./childComps/CartBottomBar.vue"
 //想用vuex里getter属性里任何一个方法，可以利用mapGetters将getter里的所有方法都拿到，在拿到组件里来使用
 import {mapGetters} from "vuex"
 export default {
+  name:'shopcart',
  components:{
    NavBar,
    Scroll,

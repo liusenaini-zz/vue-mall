@@ -33,7 +33,7 @@ export default {
     this.scroll = new BScroll(this.$refs.wrapper, {
       //$refs获取当前dom元素
       probeType: this.probeType,
-      pullUpLoad: this.pullUpLoad, //配置上拉刷新属性
+      pullUpLoad: this.pullUpLoad, //配置上拉加载更多属性
       click: true //设置此属性使滑动组件里的内容可以点击
     });
     //监听时时滚动的位置
